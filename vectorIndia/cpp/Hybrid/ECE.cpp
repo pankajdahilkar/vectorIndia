@@ -19,7 +19,7 @@ cin>>marks[a];
 ECE :: ~ECE()
 {
 
-cout<<"In destructor ECE"<<
+cout<<"In destructor ECE"<<endl;
 }
 
 void ECE :: Display()
