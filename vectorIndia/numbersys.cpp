@@ -9,14 +9,14 @@ class number
 	protected:
 		int dec_data,oct_num;
 		long int bin_data;
-		string hex_num=NULL;		
+		string hex_num;		
 	public: 
 		number()
 		{
-			 dec_data=0;
-			 oct_num=0;
-			 bin_data=0;
-		  	 //hex_num=0;
+			dec_data=0;
+			oct_num=0;
+			bin_data=0;
+			//hex_num=0;
 		}
 		virtual void conv_dec()=0;
 		virtual void conv_bin()=0;
@@ -38,6 +38,7 @@ class decimal: public number
 			cin>>dec_data;
 			cout<<"data entered is: "<<dec_data<<endl;
 		}
+		void conv_dec(){}
 		void conv_bin()
 		{
 			long int bin_data=0;
@@ -91,12 +92,13 @@ class binary : public number
 	public:
 		binary()
 		{
-		KL:	cout<<"enter the binary data(0's &1's): ";
-			cin>>bin_data;
-				for(int i=0;i<bin_data.length();i++)
-					if(bin_data[i]!='0'&& bin_data[i]!='1')
-						goto KL;
+KL:	cout<<"enter the binary data(0's &1's): ";
+	cin>>bin_data;
+	for(int i=0;i<bin_data.length();i++)
+		if(bin_data[i]!='0'&& bin_data[i]!='1')
+			goto KL;
 		}
+		void conv_bin(){}
 		void conv_dec()
 		{
 			int dec_data=0,base=1;
@@ -150,6 +152,7 @@ class octal : public number
 			cin>>oct_data;
 			cout<<"data entered is: "<<oct_data<<endl;
 		}
+		void conv_oct(){}		
 		void conv_dec()
 		{
 			int dec_data,oct=oct_data,i=0,rem;
@@ -207,6 +210,7 @@ class hex_dec: public number
 			cin>>hex_data;
 			cout<<"entered data is: "<<hex_data<<endl;
 		}
+		void conv_hex(){}		
 		void conv_dec()
 		{
 			int dec_num=0,len,base=1;
@@ -264,45 +268,48 @@ int main()
 {
 	number *num=NULL;
 	int ch;
-	cout<<"**--conversion program--***"<<endl<<"choose the type of data to enter"<<endl;
-RIP:	cout<<"0.exit__1.decimal__2.binary__3.octal__4.hex_dec"<<endl;
-	cin>>ch;
-	while(3)
+	while(1)
 	{
+		cout<<"**--conversion program--***"<<endl<<"choose the type of data to enter"<<endl;
+		cout<<"0.exit__1.decimal__2.binary__3.octal__4.hex_dec"<<endl;
+		cin>>ch;
+		//	while(3)
+		//	{
 		switch(ch)
 		{
-			case 0:exit(0);
+			case 0:return 123;
 			case 1:num=new decimal;
-			      /* num->conv_bin();
+			       num->conv_bin();
 			       num->conv_oct();
 			       num->conv_hex();
-			       */break;
+			       break;
 			case 2:num=new binary;
-			       /*num->conv_dec();
+			       num->conv_dec();
 			       num->conv_oct();
 			       num->conv_hex();
-			       */break;
+			       break;
 			case 3:num=new octal;
-			      /* num->conv_dec();
+			       num->conv_dec();
 			       num->conv_bin();
 			       num->conv_hex();
-			       */break;
+			       break;
 			case 4:num=new hex_dec;
-			       /*num->conv_dec();
+			       num->conv_dec();
 			       num->conv_bin();
 			       num->conv_oct();
-			       */break;
+			       break;
 			default:cout<<"wrong choice !!__(enter valid one)"<<endl;
-				goto RIP;
+
 		}
-			       if(num)
-			       {
-				       num->conv_dec();
-				       num->conv_bin();
-				       num->conv_hex();
-			       }
+		/*	if(num)
+			{
+			num->conv_dec();
+			num->conv_bin();
+			num->conv_hex();
+			}
+		 */
 	}
 	delete []num;
 	num=NULL;
-cout<<"**--done--**"<<endl;
-}
+	cout<<"**--done--**"<<endl;
+	}
